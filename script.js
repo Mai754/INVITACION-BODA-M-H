@@ -171,3 +171,42 @@ document.querySelectorAll('.galeria-scroll img').forEach(img => {
 function cerrarModalImagen() {
   document.getElementById('modalImagen').style.display = 'none';
 }
+
+
+const audio = document.getElementById("musicaFondo");
+const icono = document.getElementById("icono-audio");
+let estaReproduciendo = false;
+
+// Reproducir al primer toque en la pantalla
+function activarAudio() {
+  audio.play().then(() => {
+    estaReproduciendo = true;
+    icono.classList.remove("fa-volume-mute");
+    icono.classList.add("fa-volume-up");
+    document.removeEventListener("click", activarAudio);
+  }).catch(err => {
+    console.warn("Navegador bloqueó la reproducción automática:", err);
+  });
+}
+
+document.addEventListener("click", activarAudio);
+
+// Control del icono (mutear / reproducir)
+icono.addEventListener("click", (e) => {
+  e.stopPropagation(); // Evita que vuelva a disparar la activación
+
+  if (estaReproduciendo) {
+    audio.pause();
+    estaReproduciendo = false;
+    icono.classList.remove("fa-volume-up");
+    icono.classList.add("fa-volume-mute");
+  } else {
+    audio.play().then(() => {
+      estaReproduciendo = true;
+      icono.classList.remove("fa-volume-mute");
+      icono.classList.add("fa-volume-up");
+    }).catch(err => {
+      console.error("Error al reproducir el audio:", err);
+    });
+  }
+});

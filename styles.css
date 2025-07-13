@@ -41,7 +41,7 @@ h1, h2, h3 {
 .pantalla-inicial {
   position: relative;
   height: 100vh;
-  background: linear-gradient(rgba(0, 50, 20, 0.75), rgba(0, 50, 20, 0.85)), 
+  background: linear-gradient(rgba(0, 50, 20, 0.5), rgba(0, 50, 20, 0.5)), 
               url('img/fondo.jpg') center/cover no-repeat;
   display: flex;
   flex-direction: center;
@@ -53,10 +53,9 @@ h1, h2, h3 {
 }
 
 .contenedor-inicial {
-  max-width: 800px !important;
-  width: 900px !important;
+  width: 700px !important;
   background: rgba(255, 255, 255, 0.05) !important;
-  padding: 4rem 2rem 4rem 2rem !important;
+  padding: 4rem !important;
   margin-top: 3rem !important;
   border-radius: 16px !important;
   backdrop-filter: blur(6px) !important;
@@ -105,13 +104,13 @@ h1, h2, h3 {
 #contenidoPrincipal {
   display: none;
   padding: 0rem;
-  color: #f5e1a4;
+  color: #6C5B39;
 }
 
 .segunda-pantalla {
   position: relative;
   height: 100vh;
-  background: linear-gradient(rgba(0, 50, 20, 0.75), rgba(0, 50, 20, 0.85)), 
+  background: linear-gradient(rgba(0, 50, 20, 0.5), rgba(0, 50, 20, 0.5)), 
               url('img/fondo.jpg') center/cover no-repeat;
   display: flex;
   flex-direction: column;
@@ -119,7 +118,7 @@ h1, h2, h3 {
   align-items: center;
   padding: 1rem;
   text-align: center;
-  color: #f5e1a4;
+  color: #6C5B39;
   overflow: hidden;
   border-radius: 0px;
 }
@@ -130,7 +129,7 @@ h1, h2, h3 {
   padding: 3rem;
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(2px);
   animation: fadeInUp 1.2s ease both;
 }
 
@@ -607,7 +606,7 @@ h1, h2, h3 {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  max-width: 660px; /* 3 imágenes de 200px + márgenes */
+  max-width: 800px; /* 3 imágenes de 200px + márgenes */
   margin: 0 auto;
 }
 
@@ -630,7 +629,7 @@ h1, h2, h3 {
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.3);
   border: none;
-  color: #014421;
+  color: #BD7914;
   font-size: 2rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
@@ -653,8 +652,9 @@ h1, h2, h3 {
 
 /* Marco elegante a cada imagen */
 .galeria-scroll img {
-  width: 200px;
-  height: auto;
+  height: 400px;
+  width: auto;
+  object-fit: contain;
   border-radius: 0px;
   border: 3px solid #BD7914;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -1077,3 +1077,30 @@ h1, h2, h3 {
   padding: 0 !important;
   line-height: 1.5 !important;
 }
+
+
+/* ---------------------- INICIA MUSICA ---------------------- */
+
+#control-audio {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  cursor: pointer;
+  font-size: 10px;
+  background: #BD7914;
+  padding: 10px;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+#control-audio:hover {
+  background: rgb(250, 212, 0);
+}
+
+#icono-audio {
+  color: #6C5B39;
+}
+
+
+/* ---------------------- FINALIZA MUSICA ---------------------- */
