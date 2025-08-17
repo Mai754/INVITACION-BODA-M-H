@@ -21,7 +21,7 @@ document.getElementById("modalRegalo").addEventListener("click", function () {
 
 
 // Cambia esta fecha a la que desees (Año, Mes(0-11), Día, Hora, Minuto, Segundo)
-const fechaBoda = new Date(2025, 8, 27, 16, 0, 0); // Septiembre = 8
+const fechaBoda = new Date(2025, 9, 18, 17, 0, 0); // Septiembre = 8
 
 const diasSpan = document.getElementById('dias');
 const horasSpan = document.getElementById('horas');
@@ -210,3 +210,38 @@ icono.addEventListener("click", (e) => {
     });
   }
 });
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+
+  if (!id) {
+    document.body.innerHTML = "<h2>Invitación no válida.</h2>";
+    return;
+  }
+
+  try {
+    const docRef = db.collection('invitados').doc(id);
+    const doc = await docRef.get();
+
+    if (doc.exists) {
+      const data = doc.data();
+      if (data.usado) {
+        document.body.innerHTML = "<h2>Este enlace ya fue utilizado.</h2>";
+        return;
+      } else {
+        // Marca como usado
+        await docRef.update({ usado: true, fechaAcceso: new Date() });
+        console.log("Acceso registrado correctamente.");
+        // Aquí puedes mostrar el contenido del sitio normalmente
+        document.getElementById('contenido').style.display = 'block';
+      }
+    } else {
+      document.body.innerHTML = "<h2>Invitado no encontrado.</h2>";
+    }
+  } catch (error) {
+    console.error("Error al validar invitación:", error);
+    document.body.innerHTML = "<h2>Ocurrió un error al cargar la invitación.</h2>";
+  }
+});
+
