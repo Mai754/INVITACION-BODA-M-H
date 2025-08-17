@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert("Este enlace ya fue utilizado.");
       } else {
         await updateDoc(docRef, { usado: true, fechaAcceso: new Date() });
-        pantallaInicial.style.display = 'none';
+        pantallaInicial.style.display = 'block';
         contenido.style.display = 'block';
       }
     } else {
