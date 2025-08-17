@@ -211,6 +211,10 @@ icono.addEventListener("click", (e) => {
   }
 });
 
+// script.js
+import { db } from './firebase-config.js';
+import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js";
+
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
@@ -220,29 +224,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  const docRef = db.collection('links').doc(id);
-
   try {
-    const doc = await docRef.get();
+    const docRef = doc(db, "invitados", id);
+    const docSnap = await getDoc(docRef);
 
-    if (doc.exists) {
-      const data = doc.data();
+    if (docSnap.exists()) {
+      const data = docSnap.data();
       if (data.usado) {
         document.body.innerHTML = "<h2>Este enlace ya fue utilizado.</h2>";
-        return;
       } else {
-        await docRef.update({ usado: true, fechaAcceso: new Date() });
-        document.getElementById('contenido').style.display = 'block';
+        await updateDoc(docRef, { usado: true, fechaAcceso: new Date() });
+        document.getElementById('contenidoPrincipal').style.display = 'block';
+        document.getElementById('pantallaInicial').style.display = 'none';
       }
     } else {
-      // Primer uso: crea el documento y marca como usado
-      await docRef.set({ usado: true, fechaAcceso: new Date() });
-      document.getElementById('contenido').style.display = 'block';
+      document.body.innerHTML = "<h2>Invitado no encontrado.</h2>";
     }
   } catch (error) {
-    console.error("Error al validar link:", error);
-    document.body.innerHTML = "<h2>Error al cargar la invitación.</h2>";
+    console.error("Error al validar invitación:", error);
+    document.body.innerHTML = "<h2>Ocurrió un error al cargar la invitación.</h2>";
   }
 });
+
+
+
 
 
