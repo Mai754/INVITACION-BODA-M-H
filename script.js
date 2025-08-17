@@ -220,8 +220,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
+  const docRef = db.collection('links').doc(id);
+
   try {
-    const docRef = db.collection('invitados').doc(id);
     const doc = await docRef.get();
 
     if (doc.exists) {
@@ -230,18 +231,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.body.innerHTML = "<h2>Este enlace ya fue utilizado.</h2>";
         return;
       } else {
-        // Marca como usado
         await docRef.update({ usado: true, fechaAcceso: new Date() });
-        console.log("Acceso registrado correctamente.");
-        // Aquí puedes mostrar el contenido del sitio normalmente
         document.getElementById('contenido').style.display = 'block';
       }
     } else {
-      document.body.innerHTML = "<h2>Invitado no encontrado.</h2>";
+      // Primer uso: crea el documento y marca como usado
+      await docRef.set({ usado: true, fechaAcceso: new Date() });
+      document.getElementById('contenido').style.display = 'block';
     }
   } catch (error) {
-    console.error("Error al validar invitación:", error);
-    document.body.innerHTML = "<h2>Ocurrió un error al cargar la invitación.</h2>";
+    console.error("Error al validar link:", error);
+    document.body.innerHTML = "<h2>Error al cargar la invitación.</h2>";
   }
 });
+
 
