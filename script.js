@@ -216,11 +216,17 @@ import { db } from './firebase-config.js';
 import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
+  const pantallaInicial = document.getElementById('pantallaInicial');
+  const contenido = document.getElementById('contenidoPrincipal');
+
+  pantallaInicial.style.display = 'block';
+  contenido.style.display = 'none';
+
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
 
   if (!id) {
-    document.body.innerHTML = "<h2>Invitación no válida.</h2>";
+    alert("Invitación no válida.");
     return;
   }
 
@@ -231,20 +237,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (docSnap.exists()) {
       const data = docSnap.data();
       if (data.usado) {
-        document.body.innerHTML = "<h2>Este enlace ya fue utilizado.</h2>";
+        alert("Este enlace ya fue utilizado.");
       } else {
         await updateDoc(docRef, { usado: true, fechaAcceso: new Date() });
-        document.getElementById('contenidoPrincipal').style.display = 'block';
-        document.getElementById('pantallaInicial').style.display = 'none';
+        pantallaInicial.style.display = 'none';
+        contenido.style.display = 'block';
       }
     } else {
-      document.body.innerHTML = "<h2>Invitado no encontrado.</h2>";
+      alert("Invitado no encontrado.");
     }
   } catch (error) {
     console.error("Error al validar invitación:", error);
-    document.body.innerHTML = "<h2>Ocurrió un error al cargar la invitación.</h2>";
+    alert("Ocurrió un error al cargar la invitación. Mostrando contenido de todos modos.");
+    pantallaInicial.style.display = 'none';
+    contenido.style.display = 'block';
   }
 });
+
 
 
 
