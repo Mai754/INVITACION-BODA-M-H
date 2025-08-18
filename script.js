@@ -211,7 +211,7 @@ icono.addEventListener("click", (e) => {
   }
 });
 
-/*// script.js
+// script.js
 import { db } from './firebase-config.js';
 import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js";
 
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     pantallaInicial.style.display = 'none';
     contenido.style.display = 'block';
   }
-});*/
+});
 
 
 
