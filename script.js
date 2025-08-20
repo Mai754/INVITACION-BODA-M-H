@@ -216,17 +216,11 @@ import { db } from './firebase-config.js';
 import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const pantallaInicial = document.getElementById('pantallaInicial');
-  const contenido = document.getElementById('contenidoPrincipal');
-
-  pantallaInicial.style.display = 'block';
-  contenido.style.display = 'none';
-
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
 
   if (!id) {
-    alert("Invitación no válida.");
+    mostrarError("Invitación no válida.");
     return;
   }
 
@@ -237,25 +231,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (docSnap.exists()) {
       const data = docSnap.data();
       if (data.usado) {
-        alert("Este enlace ya fue utilizado.");
+        mostrarError("Este enlace ya fue utilizado.");
       } else {
         await updateDoc(docRef, { usado: true, fechaAcceso: new Date() });
-        pantallaInicial.style.display = 'block';
-        contenido.style.display = 'block';
+        console.log("Invitación válida para:", data.Invitado || "invitado sin nombre");
       }
     } else {
-      alert("Invitado no encontrado.");
+      mostrarError("Invitado no encontrado.");
     }
   } catch (error) {
     console.error("Error al validar invitación:", error);
-    alert("Ocurrió un error al cargar la invitación. Mostrando contenido de todos modos.");
-    pantallaInicial.style.display = 'none';
-    contenido.style.display = 'block';
+    mostrarError("Ocurrió un error al cargar la invitación.");
   }
 });
 
-
-
-
-
-
+function mostrarError(mensaje) {
+  // Redirige al nuevo HTML pasando el mensaje en la URL
+  window.location.href = `/error.html?msg=${encodeURIComponent(mensaje)}`;
+}
