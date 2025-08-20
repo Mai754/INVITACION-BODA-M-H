@@ -238,10 +238,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         // ✅ Mostrar pantalla inicial (bienvenida)
         const pantallaInicial = document.getElementById("pantallaInicial");
         const contenidoPrincipal = document.getElementById("contenidoPrincipal");
-
-        if (pantallaInicial) pantallaInicial.style.display = "block";
-        if (contenidoPrincipal) contenidoPrincipal.style.display = "none";
-
         console.log("Invitación válida para:", data.Invitado || "invitado sin nombre");
       }
     } else {
