@@ -73,67 +73,6 @@ function mostrarIndicaciones() {
   }
 }
 
-function confirmarInvitado() {
-  const input = document.getElementById("nombreInvitado");
-  const nombre = input.value.trim();
-  const mensaje = document.getElementById("mensaje-confirmacion");
-  const form = document.querySelector(".form-group"); // capturamos el formulario
-
-  const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
-
-  if (!soloLetras.test(nombre)) {
-    mensaje.textContent = "Por favor, ingresa solo letras en el nombre.";
-    mensaje.classList.remove("oculto");
-
-    setTimeout(() => {
-      mensaje.classList.add("oculto");
-      mensaje.textContent = "";
-    }, 3000);
-
-    return false;
-  }
-
-  const url = `https://script.google.com/macros/s/AKfycbxC-GDlTe_CHVjeM22BudkMaoJXTLBqbROc_U9-A543HSfCAZtJ7ifWaPKLJjmcUAUZOA/exec?nombre=${nombre}`;
-
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      const nombreDecoded = decodeURIComponent(nombre);
-
-      if (data.result === "success") {
-        mensaje.textContent = `¡Gracias, ${nombreDecoded}, por confirmar tu asistencia!`;
-        mensaje.classList.remove("oculto");
-
-        // Ocultar formulario al confirmar
-        form.style.display = "none";
-
-        setTimeout(() => {
-          mensaje.classList.add("oculto");
-          mensaje.textContent = "";
-        }, 3000);
-
-        input.value = "";
-      } else {
-        mensaje.textContent = "Ocurrió un error en el servidor. Intenta más tarde.";
-        mensaje.classList.remove("oculto");
-
-        setTimeout(() => {
-          mensaje.classList.add("oculto");
-          mensaje.textContent = "";
-        }, 3000);
-
-        input.value = "";
-      }
-    })
-    .catch(err => {
-      console.error("Error al enviar:", err);
-      alert("No se pudo enviar tu confirmación. Verifica tu conexión.");
-    });
-
-  return false;
-}
-
-
 function scrollGaleria(direccion) {
   const galeria = document.getElementById('galeriaScroll');
   const scrollCantidad = 250; // píxeles por clic
@@ -215,6 +154,7 @@ icono.addEventListener("click", (e) => {
 import { db } from './firebase-config.js';
 import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js";
 
+// --- Validación de invitación al cargar la página ---
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
@@ -228,25 +168,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     const docRef = doc(db, "invitados", id);
     const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-      if (data.usado) {
-        window.location.href = "error.html?msg=Este enlace ya fue utilizado.";
-      } else {
-        await updateDoc(docRef, { usado: true, fechaAcceso: new Date() });
-        console.log("Invitación válida para:", data.Invitado || "invitado sin nombre");
-        // ✅ No modificamos el diseño aquí
-      }
-    } else {
+    if (!docSnap.exists()) {
       window.location.href = "error.html?msg=Invitado no encontrado.";
+      return;
     }
+
+    const data = docSnap.data();
+    if (data.usado) {
+      window.location.href = "error.html?msg=Este enlace ya fue utilizado.";
+      return;
+    }
+
+    // ✅ Invitación válida, dejamos que siga el flujo
+    console.log("Invitación válida para:", data.Invitado || "invitado sin nombre");
+
   } catch (error) {
     console.error("Error al validar invitación:", error);
     window.location.href = "error.html?msg=Ocurrió un error al cargar la invitación.";
   }
 });
 
-// Función global para botón "Ver Invitación"
+// --- Función global para mostrar la invitación ---
 window.mostrarInvitacion = function () {
   const pantallaInicial = document.getElementById("pantallaInicial");
   const contenidoPrincipal = document.getElementById("contenidoPrincipal");
@@ -254,4 +196,76 @@ window.mostrarInvitacion = function () {
   if (pantallaInicial) pantallaInicial.style.display = "none";
   if (contenidoPrincipal) contenidoPrincipal.style.display = "block";
 };
+
+// --- Confirmación de asistencia ---
+function confirmarInvitado() {
+  const input = document.getElementById("nombreInvitado");
+  const nombre = input.value.trim();
+  const mensaje = document.getElementById("mensaje-confirmacion");
+  const form = document.querySelector(".form-group"); // formulario
+  const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+
+  if (!soloLetras.test(nombre)) {
+    mensaje.textContent = "Por favor, ingresa solo letras en el nombre.";
+    mensaje.classList.remove("oculto");
+    setTimeout(() => {
+      mensaje.classList.add("oculto");
+      mensaje.textContent = "";
+    }, 3000);
+    return false;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  // Enviar datos a Google Sheets
+  const url = `https://script.google.com/macros/s/AKfycbxC-GDlTe_CHVjeM22BudkMaoJXTLBqbROc_U9-A543HSfCAZtJ7ifWaPKLJjmcUAUZOA/exec?nombre=${encodeURIComponent(nombre)}&id=${id}`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(async data => {
+      const nombreDecoded = decodeURIComponent(nombre);
+
+      if (data.result === "success") {
+        mensaje.textContent = `¡Gracias, ${nombreDecoded}, por confirmar tu asistencia!`;
+        mensaje.classList.remove("oculto");
+
+        // Ocultar formulario al confirmar
+        form.style.display = "none";
+        input.value = "";
+
+        // ✅ Marcar la invitación como usada en Firebase SOLO después de confirmar
+        try {
+          const docRef = doc(db, "invitados", id);
+          await updateDoc(docRef, { usado: true, fechaAcceso: new Date() });
+        } catch (err) {
+          console.error("Error al marcar invitación como usada:", err);
+        }
+
+        setTimeout(() => {
+          mensaje.classList.add("oculto");
+          mensaje.textContent = "";
+        }, 3000);
+
+      } else {
+        mensaje.textContent = "Ocurrió un error en el servidor. Intenta más tarde.";
+        mensaje.classList.remove("oculto");
+        input.value = "";
+        setTimeout(() => {
+          mensaje.classList.add("oculto");
+          mensaje.textContent = "";
+        }, 3000);
+      }
+    })
+    .catch(err => {
+      console.error("Error al enviar:", err);
+      alert("No se pudo enviar tu confirmación. Verifica tu conexión.");
+    });
+
+  return false; // Evita que se recargue la página
+}
+
+// Hacemos global la función para que el HTML la pueda llamar
+window.confirmarInvitado = confirmarInvitado;
+
 
