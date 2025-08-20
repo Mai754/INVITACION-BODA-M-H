@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const id = params.get('id');
 
   if (!id) {
-    mostrarError("Invitación no válida.");
+    window.location.href = "error.html?msg=Invitación no válida.";
     return;
   }
 
@@ -231,27 +231,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (docSnap.exists()) {
       const data = docSnap.data();
       if (data.usado) {
-        mostrarError("Este enlace ya fue utilizado.");
+        window.location.href = "error.html?msg=Este enlace ya fue utilizado.";
       } else {
         await updateDoc(docRef, { usado: true, fechaAcceso: new Date() });
 
-        // 👉 Mostrar contenido principal
-        const invitacion = document.getElementById("invitacion");
-        const errorBox = document.getElementById("error-box");
+        // ✅ Mostrar pantalla inicial (bienvenida)
+        const pantallaInicial = document.getElementById("pantallaInicial");
+        const contenidoPrincipal = document.getElementById("contenidoPrincipal");
 
-        if (invitacion) invitacion.style.display = "block";
-        if (errorBox) errorBox.style.display = "none";
+        if (pantallaInicial) pantallaInicial.style.display = "block";
+        if (contenidoPrincipal) contenidoPrincipal.style.display = "none";
 
         console.log("Invitación válida para:", data.Invitado || "invitado sin nombre");
       }
+    } else {
+      window.location.href = "error.html?msg=Invitado no encontrado.";
     }
   } catch (error) {
     console.error("Error al validar invitación:", error);
-    mostrarError("Ocurrió un error al cargar la invitación.");
+    window.location.href = "error.html?msg=Ocurrió un error al cargar la invitación.";
   }
 });
 
-function mostrarError(mensaje) {
-  // Redirige al nuevo HTML pasando el mensaje en la URL
-  window.location.href = `/error.html?msg=${encodeURIComponent(mensaje)}`;
-}
+// 👉 Función global para botón "Ver Invitación"
+window.mostrarInvitacion = function () {
+  const pantallaInicial = document.getElementById("pantallaInicial");
+  const contenidoPrincipal = document.getElementById("contenidoPrincipal");
+
+  if (pantallaInicial) pantallaInicial.style.display = "none";
+  if (contenidoPrincipal) contenidoPrincipal.style.display = "block";
+};
