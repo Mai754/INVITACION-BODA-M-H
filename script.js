@@ -234,11 +234,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.location.href = "error.html?msg=Este enlace ya fue utilizado.";
       } else {
         await updateDoc(docRef, { usado: true, fechaAcceso: new Date() });
-
-        // ✅ Mostrar pantalla inicial (bienvenida)
-        const pantallaInicial = document.getElementById("pantallaInicial");
-        const contenidoPrincipal = document.getElementById("contenidoPrincipal");
         console.log("Invitación válida para:", data.Invitado || "invitado sin nombre");
+        // ✅ No modificamos el diseño aquí
       }
     } else {
       window.location.href = "error.html?msg=Invitado no encontrado.";
@@ -249,7 +246,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
-// 👉 Función global para botón "Ver Invitación"
+// Función global para botón "Ver Invitación"
 window.mostrarInvitacion = function () {
   const pantallaInicial = document.getElementById("pantallaInicial");
   const contenidoPrincipal = document.getElementById("contenidoPrincipal");
@@ -257,3 +254,4 @@ window.mostrarInvitacion = function () {
   if (pantallaInicial) pantallaInicial.style.display = "none";
   if (contenidoPrincipal) contenidoPrincipal.style.display = "block";
 };
+
