@@ -234,10 +234,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         mostrarError("Este enlace ya fue utilizado.");
       } else {
         await updateDoc(docRef, { usado: true, fechaAcceso: new Date() });
+
+        // 👉 Mostrar contenido principal
+        const invitacion = document.getElementById("invitacion");
+        const errorBox = document.getElementById("error-box");
+
+        if (invitacion) invitacion.style.display = "block";
+        if (errorBox) errorBox.style.display = "none";
+
         console.log("Invitación válida para:", data.Invitado || "invitado sin nombre");
       }
-    } else {
-      mostrarError("Invitado no encontrado.");
     }
   } catch (error) {
     console.error("Error al validar invitación:", error);
