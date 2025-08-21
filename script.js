@@ -2,23 +2,35 @@ function mostrarInvitacion() {
   document.getElementById('pantallaInicial').style.display = 'none';
   document.getElementById('contenidoPrincipal').style.display = 'block';
 }
+
 function mostrarModal() {
   const modal = document.getElementById("modalRegalo");
   modal.style.display = "flex";
-  document.body.style.overflow = "hidden"; // bloquear scroll de fondo
+  document.body.style.overflow = "hidden";
 }
 
 function cerrarModal() {
   const modal = document.getElementById("modalRegalo");
   modal.style.display = "none";
-  document.body.style.overflow = ""; // restaurar scroll
+  document.body.style.overflow = "";
 }
 
-// Cierre al hacer clic fuera del modal-content
-document.getElementById("modalRegalo").addEventListener("click", function () {
-  cerrarModal();
-});
+// Hacerlas globales si usas onclick en el HTML
+window.mostrarModal = mostrarModal;
+window.cerrarModal = cerrarModal;
 
+
+// Cierre al hacer clic fuera del modal-content
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("modalRegalo");
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) { // solo cuando clic en fondo
+        cerrarModal();
+      }
+    });
+  }
+});
 
 // Cambia esta fecha a la que desees (Año, Mes(0-11), Día, Hora, Minuto, Segundo)
 const fechaBoda = new Date(2025, 9, 18, 17, 0, 0); // Septiembre = 8
@@ -72,6 +84,9 @@ function mostrarIndicaciones() {
     console.error('Elemento popupIndicaciones no encontrado');
   }
 }
+
+// Exponer función globalmente
+window.mostrarIndicaciones = mostrarIndicaciones;
 
 function scrollGaleria(direccion) {
   const galeria = document.getElementById('galeriaScroll');
