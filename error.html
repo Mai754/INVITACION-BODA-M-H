@@ -5,20 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Error de invitación</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
   <div class="error-container">
     <h1>Error con la invitación</h1>
     <p id="mensajeError"></p>
+
+    <div class="error-botones">
+      <button class="btn-error" onclick="abrirModal('modalIndicaciones')">
+        Tips y Notas
+      </button>
+      <button class="btn-error" onclick="abrirModal('modalObsequios')">
+        Obsequios
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal de Indicaciones -->
+  <div id="modalIndicaciones" class="modal">
+    <div class="modal-contenido">
+      <h3>TIPS Y NOTAS</h3>
+      <p>• ¡Por favor ser puntuales!</p>
+      <p>• Queremos que disfrutes de esta fiesta al máximo, por eso decidimos que sea un evento solo para adultos.</p>
+      <p>• ¡Confirmar asistencia a la brevedad, antes de la fecha!</p>
+      <p>• ¡La confirmación es personal, es decir, una invitación por persona!</p>
+      <p>• Llevar abrigo para disfrutar de los espacios exteriores.</p>
+      <p>• ¡Por favor considerar el cuidado del moviliario a ser utilizado!</p>
+      <p>• Olvidarse de todo y ¡a disfrutar!</p>
+    </div>
+  </div>
+
+  <!-- Modal de Obsequios -->
+  <div id="modalObsequios" class="modal">
+    <div class="modal-contenido">
+      <h3>OBSEQUIOS</h3>
+      <p>Para quienes deseen hacer un regalo en </p>
+      <p>efectivo, contaremos con sobres disponibles</p>
+      <p>para depositar en el cofre. Tambien puede</p>
+      <p>contribuir mediante:</p>
+      <div class="bloque-banco">
+          <p><strong>Deposito bancario Ban Pais</strong></p>
+          <p><strong>Cuenta:</strong> 213800195765</p>
+        </div>
+    </div>
   </div>
 
   <script>
-    // Tomamos el mensaje desde la URL
+    // Mostrar mensaje de error desde URL
     const params = new URLSearchParams(window.location.search);
     const msg = params.get("msg") || "Ha ocurrido un error inesperado.";
     document.getElementById("mensajeError").textContent = msg;
+
+    // Funciones para abrir y cerrar modales
+    function abrirModal(id) {
+      document.getElementById(id).style.display = "flex";
+    }
+    function cerrarModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+    // Cerrar modal haciendo clic fuera del contenido
+    window.onclick = function(e) {
+      const modales = document.querySelectorAll(".modal");
+      modales.forEach(modal => {
+        if (e.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    }
   </script>
 </body>
 </html>
+
 
 
