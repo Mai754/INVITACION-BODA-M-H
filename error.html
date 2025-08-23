@@ -3,26 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Error de invitación</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <title>Error Invitación</title>
+  <link rel="stylesheet" href="styleseError.css">
 </head>
 <body>
-  <div class="error-container">
-    <h1>Error con la invitación</h1>
-    <p id="mensajeError"></p>
+  <div class="container">
+    
 
-    <div class="error-botones">
-      <button class="btn-error" onclick="abrirModal('modalIndicaciones')">
-        Tips y Notas
-      </button>
-      <button class="btn-error" onclick="abrirModal('modalObsequios')">
-        Obsequios
-      </button>
+    <!-- Error -->
+    <div class="error-container">
+      <h1>GRACIAS POR CONFIRMAR</h1>
+      <p id="mensajeError"></p>
+
+      <!-- Botones -->
+      <div class="botones">
+        <button onclick="abrirModal('modalIndicaciones')">Tips y Notas</button>
+        <button onclick="abrirModal('modalObsequios')">Obsequios</button>
+      </div>
     </div>
+
+    <!-- Parte superior -->
+    <div class="top-section">
+      <div class="bloque-re">
+        <h1>M & H</h1>
+      </div>
+      <div class="cuenta-regresiva">
+        <div class="unidad-tiempo">
+          <span id="dias">00</span>
+          <label>Días</label>
+        </div>
+        <div class="unidad-tiempo">
+          <span id="horas">00</span>
+          <label>Horas</label>
+        </div>
+        <div class="unidad-tiempo">
+          <span id="minutos">00</span>
+          <label>Min</label>
+        </div>
+        <div class="unidad-tiempo">
+          <span id="segundos">00</span>
+          <label>Seg</label>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Modal de Indicaciones -->
+  <!-- Modales -->
   <div id="modalIndicaciones" class="modal">
     <div class="modal-contenido">
       <h3>TIPS Y NOTAS</h3>
@@ -36,7 +63,6 @@
     </div>
   </div>
 
-  <!-- Modal de Obsequios -->
   <div id="modalObsequios" class="modal">
     <div class="modal-contenido">
       <h3>OBSEQUIOS</h3>
@@ -45,11 +71,13 @@
       <p>para depositar en el cofre. Tambien puede</p>
       <p>contribuir mediante:</p>
       <div class="bloque-banco">
-          <p><strong>Deposito bancario Ban Pais</strong></p>
-          <p><strong>Cuenta:</strong> 213800195765</p>
-        </div>
+        <p><strong>Deposito bancario Ban Pais</strong></p>
+        <p><strong>Cuenta:</strong> 213800195765</p>
+      </div>
     </div>
   </div>
+
+  <script type="module" src="script.js"></script>
 
   <script>
     // Mostrar mensaje de error desde URL
@@ -74,9 +102,6 @@
       });
     }
   </script>
+
 </body>
 </html>
-
-
-
-

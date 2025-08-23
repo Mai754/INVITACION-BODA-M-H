@@ -1,0 +1,278 @@
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fdfdfd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    /* Sección superior */
+    .top-section {
+      text-align: center;
+    }
+
+    .bloque-re h1 {
+      font-size: 3rem;
+      font-family: 'Playfair Display', serif;
+      color: #BD7914;
+      margin: 0.5rem 0 1.5rem 0;
+    }
+
+    .cuenta-regresiva {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .unidad-tiempo {
+      background: #222E27;
+      color: #BD7914;
+      font-family: 'Roboto', monospace;
+      text-align: center;
+      border-radius: 10px;
+      padding: 0.8rem;
+      min-width: 70px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .unidad-tiempo span {
+      font-size: 2rem;
+      font-weight: bold;
+      display: block;
+    }
+
+    .unidad-tiempo label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 0.3rem;
+      display: block;
+    }
+
+    /* Error */
+    .error-container {
+        text-align: center;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 2rem 2.5rem;
+        max-width: 700px;      /* antes estaba 500px */
+        width: 80%;             /* se ajusta en pantallas pequeñas */
+        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        margin: 0 auto;         /* centrado horizontal */
+    }
+
+    .error-container h1 {
+      font-size: 1.5rem;
+      color: #BD7914;
+      margin-bottom: 1rem;
+    }
+
+    .error-container p {
+      font-size: 1rem;
+      color: #8b1d1d;
+      margin: 0 0 1.5rem 0;
+    }
+
+    /* Botones */
+    .botones {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .botones button {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      background: #BD7914;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .botones button:hover {
+      background: #a66a12;
+    }
+
+    /* Modales */
+    .modal {
+    display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem; /* separación de los bordes */
+  box-sizing: border-box;
+}
+    
+
+    .modal-content {
+    background: #fff;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  padding: 2rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  position: relative;
+  margin: auto; /* asegura centrado correcto */
+  box-sizing: border-box;
+}
+
+    .modal-content h3 {
+      margin-top: 0;
+      color: #BD7914;
+    }
+
+    .close {
+      color: #333;
+      float: right;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #BD7914;
+    }
+
+    /* --- Estilos básicos de modales --- */
+    /* --- MODALES PARA PÁGINA DE ERROR --- */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7); /* fondo oscuro translúcido */
+      display: none; /* oculto por defecto */
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .modal-contenido {
+      background: linear-gradient(135deg, #222E27, #171f1a);
+      padding: 3rem 2rem;
+      border-radius: 12px;
+      text-align: center;   /* 👈 TODO CENTRADO */
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      max-width: 600px;
+      width: 90%;
+      max-height: 80%;
+      overflow-y: auto;
+      margin: auto;         /* 👈 asegura el centrado vertical/horizontal */
+    }
+
+    .modal-contenido h3 {
+      font-family: 'Playfair Display', serif;
+      color: #BD7914;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-contenido p {
+      font-family: 'Montserrat', sans-serif;
+      color: #D4C5A1;
+      line-height: 1.6;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .cerrar {
+      display: block;
+      margin-left: auto;
+      font-size: 1.5rem;
+      color: #BD7914;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .cerrar:hover {
+      color: #fff;
+    }
+
+    /* Botones debajo del error */
+    .error-botones {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .error-botones .btn {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #BD7914, #8d5d0e);
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      margin: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+    .error-botones .btn:hover {
+      background: linear-gradient(135deg, #8d5d0e, #BD7914);
+    }
+
+
+    .btn-error {
+      background: #BD7914;              /* color dorado elegante */
+      color: #fff;                      /* texto blanco */
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;                  /* más pequeño */
+      padding: 0.6rem 1.4rem;           /* tamaño compacto */
+      border-radius: 8px;               /* esquinas suaves */
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-error:hover {
+      background: #8d5d0e;              /* tono dorado más oscuro al pasar */
+      transform: scale(1.05);           /* pequeño efecto de zoom */
+    }
+
+    .bloque-banco {
+      position: relative;
+      margin: 2rem auto;
+      padding: 1.5rem 1rem;
+      max-width: 300px;
+    }
+
+    .bloque-banco::before,
+    .bloque-banco::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #BD7914, #BD7914, #BD7914, transparent);
+    }
+
+    .bloque-banco::before {
+      top: 0;
+    }
+
+    .bloque-banco::after {
+      bottom: 0;
+    }
