@@ -123,8 +123,12 @@ document.querySelectorAll('.galeria-scroll img').forEach(img => {
 
 // Cerrar modal
 function cerrarModalImagen() {
-  document.getElementById('modalImagen').style.display = 'none';
+  const modal = document.getElementById('modalImagen');
+  if (modal) modal.style.display = 'none';
 }
+
+// Exponer la función globalmente para que el HTML pueda usarla
+window.cerrarModalImagen = cerrarModalImagen;
 
 
 const audio = document.getElementById("musicaFondo");
