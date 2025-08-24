@@ -55,10 +55,10 @@
 
 .fondo-imagen {
   position: absolute;
-  top: -220px;              /* sobresale hacia arriba */
+  top: -190px;              /* sobresale hacia arriba */
   left: 50%;
   transform: translateX(-50%);
-  width: 180%;
+  width: 200%;
   height: 250px;            /* ajusta según tu gusto */
   background-image: url('img/fondo.jpg'); /* tu imagen aquí */
   background-size: cover;
@@ -393,6 +393,7 @@
 
 /* ---------------------- FINALIZA CUENTA REGRESIVA ---------------------- */
     
+
 
 
 
