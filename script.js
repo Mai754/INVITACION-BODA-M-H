@@ -136,13 +136,40 @@ function initGaleria() {
 document.addEventListener('DOMContentLoaded', initGaleria);
 
 
+// Mostrar modal con imagen
+function abrirModalImagen(src) {
+  const modal = document.getElementById('modalImagen');
+  const imgGrande = document.getElementById('imagenGrande');
+  if (modal && imgGrande) {
+    imgGrande.src = src;
+    modal.style.display = 'flex';
+  }
+}
+
 // Cerrar modal
 function cerrarModalImagen() {
   const modal = document.getElementById('modalImagen');
   if (modal) modal.style.display = 'none';
 }
 
-// Exponer la función globalmente para que el HTML pueda usarla
+// Eventos seguros para móvil/PC
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('modalImagen');
+  const cerrarBtn = document.getElementById('cerrarModal');
+
+  if (!modal) return;
+
+  // Botón de cerrar
+  cerrarBtn.addEventListener('click', cerrarModalImagen);
+
+  // Cerrar tocando fuera de la imagen
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) cerrarModalImagen();
+  });
+});
+
+// Exponer funciones globalmente
+window.abrirModalImagen = abrirModalImagen;
 window.cerrarModalImagen = cerrarModalImagen;
 
 
