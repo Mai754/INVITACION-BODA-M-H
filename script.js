@@ -88,23 +88,27 @@ function mostrarIndicaciones() {
 // Exponer función globalmente
 window.mostrarIndicaciones = mostrarIndicaciones;
 
-function scrollGaleria(direccion) {
-  const galeria = document.getElementById('galeriaScroll');
-  const scrollCantidad = 250; // píxeles por clic
+// Elementos
+const galeria = document.getElementById("galeriaScroll");
+const scrollCantidad = 250;
 
-  if (galeria) {
-    galeria.scrollBy({
-      left: direccion * scrollCantidad,
-      behavior: 'smooth'
-    });
-  }
+// --- Función para mover la galería ---
+function scrollGaleria(direccion) {
+  galeria.scrollBy({
+    left: direccion * scrollCantidad,
+    behavior: "smooth"
+  });
 }
 
-// 👇 importante: exponer al scope global
-window.scrollGaleria = scrollGaleria;
+// --- Auto-scroll ---
+let autoScroll = setInterval(() => {
+  galeria.scrollLeft += 210;
+  if (galeria.scrollLeft + galeria.clientWidth >= galeria.scrollWidth) {
+    galeria.scrollLeft = 0; // vuelve al inicio
+  }
+}, 3000);
 
-// Auto-scroll de la galería
-const galeria = document.getElementById("galeriaScroll");
+// --- Eventos para pausar/reanudar ---
 galeria.addEventListener("mouseover", () => clearInterval(autoScroll));
 galeria.addEventListener("mouseleave", () => {
   autoScroll = setInterval(() => {
@@ -114,6 +118,14 @@ galeria.addEventListener("mouseleave", () => {
     }
   }, 3000);
 });
+
+// --- Botones izquierda/derecha ---
+document.querySelector(".flecha.izquierda")
+  .addEventListener("click", () => scrollGaleria(-1));
+
+document.querySelector(".flecha.derecha")
+  .addEventListener("click", () => scrollGaleria(1));
+
  // cambia cada 3 segundos
 
 // Mostrar imagen en grande
