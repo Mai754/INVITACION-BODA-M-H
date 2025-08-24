@@ -139,33 +139,21 @@ document.addEventListener('DOMContentLoaded', initGaleria);
 
 
 
-// Abrir modal
-function abrirModalImagen(src) {
-  const modal = document.getElementById('modalImagen');
-  const imgGrande = document.getElementById('imagenGrande');
-  imgGrande.src = src;
-  modal.style.display = 'flex';
+function scrollGaleria(direccion) {
+  const galeria = document.getElementById('galeriaScroll');
+  const scrollCantidad = 250; // píxeles por clic
+
+  if (galeria) {
+    galeria.scrollBy({
+      left: direccion * scrollCantidad,
+      behavior: 'smooth'
+    });
+  }
 }
 
-// Cerrar modal
-function cerrarModalImagen() {
-  document.getElementById('modalImagen').style.display = 'none';
-}
+// 👇 importante: exponer al scope global
+window.scrollGaleria = scrollGaleria;
 
-// Manejador universal
-document.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("modalImagen");
-  const imagenGrande = document.getElementById("imagenGrande");
-
-  // Cerrar si se hace click o toque fuera de la imagen
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) cerrarModalImagen();
-  });
-});
-
-// Exponer globalmente
-window.abrirModalImagen = abrirModalImagen;
-window.cerrarModalImagen = cerrarModalImagen;
 
 
 
