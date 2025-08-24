@@ -88,53 +88,53 @@ function mostrarIndicaciones() {
 // Exponer función globalmente
 window.mostrarIndicaciones = mostrarIndicaciones;
 
-// Elementos
-const galeria = document.getElementById("galeriaScroll");
-const scrollCantidad = 250;
+// === GALERÍA (seguro para type="module" y para páginas sin galería) ===
+function initGaleria() {
+  const galeria = document.getElementById('galeriaScroll');
+  if (!galeria) return; // si no hay galería en esta página, salimos sin romper nada
 
-// --- Función para mover la galería ---
-function scrollGaleria(direccion) {
-  galeria.scrollBy({
-    left: direccion * scrollCantidad,
-    behavior: "smooth"
-  });
-}
+  const SCROLL_PX = 250;
 
-// --- Auto-scroll ---
-let autoScroll = setInterval(() => {
-  galeria.scrollLeft += 210;
-  if (galeria.scrollLeft + galeria.clientWidth >= galeria.scrollWidth) {
-    galeria.scrollLeft = 0; // vuelve al inicio
+  // Mover galería (usado por botones e inline onclick)
+  function scrollGaleria(direccion) {
+    galeria.scrollBy({
+      left: direccion * SCROLL_PX,
+      behavior: 'smooth'
+    });
   }
-}, 3000);
 
-// --- Eventos para pausar/reanudar ---
-galeria.addEventListener("mouseover", () => clearInterval(autoScroll));
-galeria.addEventListener("mouseleave", () => {
-  autoScroll = setInterval(() => {
+  // Exponer SOLO para soportar el HTML con onclick="scrollGaleria(...)"
+  // (si no usas onclick, no pasa nada)
+  window.scrollGaleria = scrollGaleria;
+
+  // Botones (si existen)
+  const btnIzq = document.querySelector('.flecha.izquierda');
+  const btnDer = document.querySelector('.flecha.derecha');
+  if (btnIzq) btnIzq.addEventListener('click', () => scrollGaleria(-1));
+  if (btnDer) btnDer.addEventListener('click', () => scrollGaleria(1));
+
+  // Auto-scroll con pausa al pasar el mouse
+  let autoScroll = setInterval(() => {
     galeria.scrollLeft += 210;
     if (galeria.scrollLeft + galeria.clientWidth >= galeria.scrollWidth) {
       galeria.scrollLeft = 0;
     }
   }, 3000);
-});
 
-// --- Botones izquierda/derecha ---
-document.querySelector(".flecha.izquierda")
-  .addEventListener("click", () => scrollGaleria(-1));
-
-document.querySelector(".flecha.derecha")
-  .addEventListener("click", () => scrollGaleria(1));
-
- // cambia cada 3 segundos
-
-// Mostrar imagen en grande
-document.querySelectorAll('.galeria-scroll img').forEach(img => {
-  img.addEventListener('click', () => {
-    document.getElementById('imagenGrande').src = img.src;
-    document.getElementById('modalImagen').style.display = 'flex';
+  galeria.addEventListener('mouseover', () => clearInterval(autoScroll));
+  galeria.addEventListener('mouseleave', () => {
+    autoScroll = setInterval(() => {
+      galeria.scrollLeft += 210;
+      if (galeria.scrollLeft + galeria.clientWidth >= galeria.scrollWidth) {
+        galeria.scrollLeft = 0;
+      }
+    }, 3000);
   });
-});
+}
+
+// Asegura que el DOM exista antes de enganchar eventos
+document.addEventListener('DOMContentLoaded', initGaleria);
+
 
 // Cerrar modal
 function cerrarModalImagen() {
