@@ -68,7 +68,7 @@
       border-radius: 12px;
       padding: 2rem 2.5rem;
       max-width: 80%;        /* 👈 que ocupe el ancho del container */
-      width: 100%;
+      width: 80%;
       box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     }
 
@@ -286,5 +286,6 @@
   padding: 2rem 1rem; /* agrega margen lateral */
   box-sizing: border-box;
 }
+
 
 
