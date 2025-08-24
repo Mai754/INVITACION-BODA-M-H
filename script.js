@@ -136,7 +136,10 @@ function initGaleria() {
 document.addEventListener('DOMContentLoaded', initGaleria);
 
 
-// Mostrar modal con imagen
+
+
+
+// Abrir modal
 function abrirModalImagen(src) {
   const modal = document.getElementById('modalImagen');
   const imgGrande = document.getElementById('imagenGrande');
@@ -152,25 +155,30 @@ function cerrarModalImagen() {
   if (modal) modal.style.display = 'none';
 }
 
-// Eventos seguros para móvil/PC
-document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('modalImagen');
-  const cerrarBtn = document.getElementById('cerrarModal');
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("modalImagen");
+  const imagenGrande = document.getElementById("imagenGrande");
 
-  if (!modal) return;
+  // Cierra si se toca fuera de la imagen
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      cerrarModalImagen();
+    }
+  });
 
-  // Botón de cerrar
-  cerrarBtn.addEventListener('click', cerrarModalImagen);
-
-  // Cerrar tocando fuera de la imagen
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) cerrarModalImagen();
+  // Evita que al tocar la imagen también cierre el modal
+  imagenGrande.addEventListener("click", (e) => {
+    e.stopPropagation();
   });
 });
 
-// Exponer funciones globalmente
+// Exponer globalmente
 window.abrirModalImagen = abrirModalImagen;
 window.cerrarModalImagen = cerrarModalImagen;
+
+
+
+
 
 
 const audio = document.getElementById("musicaFondo");
