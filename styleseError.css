@@ -68,7 +68,7 @@
         border-radius: 12px;
         padding: 2rem 2.5rem;
         max-width: 700px;      /* antes estaba 500px */
-        width: 80%;             /* se ajusta en pantallas pequeñas */
+        width: 90%;             /* se ajusta en pantallas pequeñas */
         box-shadow: 0 6px 18px rgba(0,0,0,0.15);
         margin: 0 auto;         /* centrado horizontal */
     }
@@ -275,4 +275,5 @@
 
     .bloque-banco::after {
       bottom: 0;
+
     }
