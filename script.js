@@ -143,16 +143,6 @@ document.addEventListener('DOMContentLoaded', initGaleria);
 function abrirModalImagen(src) {
   const modal = document.getElementById('modalImagen');
   const imgGrande = document.getElementById('imagenGrande');
-  if (modal && imgGrande) {
-    imgGrande.src = src;
-    modal.style.display = 'flex';
-  }
-}
-
-// Abrir modal
-function abrirModalImagen(src) {
-  const modal = document.getElementById('modalImagen');
-  const imgGrande = document.getElementById('imagenGrande');
   imgGrande.src = src;
   modal.style.display = 'flex';
 }
@@ -176,6 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Exponer globalmente
 window.abrirModalImagen = abrirModalImagen;
 window.cerrarModalImagen = cerrarModalImagen;
+
 
 
 
