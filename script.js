@@ -32,6 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+
+
 // Cambia esta fecha a la que desees (Año, Mes(0-11), Día, Hora, Minuto, Segundo)
 const fechaBoda = new Date(2025, 9, 18, 17, 0, 0); // Septiembre = 8
 
@@ -88,6 +90,7 @@ function mostrarIndicaciones() {
 // Exponer función globalmente
 window.mostrarIndicaciones = mostrarIndicaciones;
 
+
 // === GALERÍA (seguro para type="module" y para páginas sin galería) ===
 function initGaleria() {
   const galeria = document.getElementById('galeriaScroll');
@@ -136,29 +139,26 @@ function initGaleria() {
 document.addEventListener('DOMContentLoaded', initGaleria);
 
 
+ // cambia cada 3 segundos
+
+// Mostrar imagen en grande
+document.querySelectorAll('.galeria-scroll img').forEach(img => {
+  img.addEventListener('click', () => {
+    document.getElementById('imagenGrande').src = img.src;
+    document.getElementById('modalImagen').style.display = 'flex';
+  });
+});
 
 
 
-function scrollGaleria(direccion) {
-  const galeria = document.getElementById('galeriaScroll');
-  const scrollCantidad = 250; // píxeles por clic
-
-  if (galeria) {
-    galeria.scrollBy({
-      left: direccion * scrollCantidad,
-      behavior: 'smooth'
-    });
-  }
+// Cerrar modal
+function cerrarModalImagen() {
+  const modal = document.getElementById('modalImagen');
+  if (modal) modal.style.display = 'none';
 }
 
-// 👇 importante: exponer al scope global
-window.scrollGaleria = scrollGaleria;
-
-
-
-
-
-
+// Exponer la función globalmente para que el HTML pueda usarla
+window.cerrarModalImagen = cerrarModalImagen;
 
 
 
@@ -199,6 +199,7 @@ icono.addEventListener("click", (e) => {
     });
   }
 });
+
 
 // script.js
 import { db } from './firebase-config.js';
@@ -317,5 +318,6 @@ function confirmarInvitado() {
 
 // Hacemos global la función para que el HTML la pueda llamar
 window.confirmarInvitado = confirmarInvitado;
+
 
 
