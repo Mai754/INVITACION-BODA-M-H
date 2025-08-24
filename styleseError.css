@@ -23,41 +23,75 @@
     }
 
     .bloque-re h1 {
-      font-size: 3rem;
+      font-size: 4.5rem;
+      margin: 0;
       font-family: 'Playfair Display', serif;
       color: #BD7914;
-      margin: 0.5rem 0 1.5rem 0;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      padding: 0.5rem 0rem 0.5rem 0rem;
     }
 
-    .cuenta-regresiva {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
+    .bloque-re {
+  position: relative;
+  margin: 0 auto;           /* centrado horizontal */
+  padding: 0;               /* ya no necesitamos padding */
+  max-width: 320px;
+  text-align: center;
+  z-index: 1;
+  overflow: visible;        /* permite que la imagen sobresalga hacia arriba */
+}
+
+.bloque-re h1 {
+  position: relative;
+  z-index: 2;               /* texto encima de la imagen */
+  font-size: 4.5rem;
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  color: #BD7914;
+}
+
+.fondo-imagen {
+  position: absolute;
+  top: -220px;              /* sobresale hacia arriba */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180%;
+  height: 250px;            /* ajusta según tu gusto */
+  background-image: url('img/fondo.jpg'); /* tu imagen aquí */
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  filter: grayscale(100%);  /* blanco y negro */
+  z-index: 1;
+
+  /* degradado que hace que la imagen desaparezca hacia abajo, justo donde están las letras */
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+}
+
+
+
+
+    .bloque-re::before,
+    .bloque-re::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #BD7914, #BD7914, #BD7914, transparent);
+      z-index: 0;
     }
 
-    .unidad-tiempo {
-      background: #222E27;
-      color: #BD7914;
-      font-family: 'Roboto', monospace;
-      text-align: center;
-      border-radius: 10px;
-      padding: 0.8rem;
-      min-width: 70px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    .bloque-re::before {
+      top: 0;
     }
 
-    .unidad-tiempo span {
-      font-size: 2rem;
-      font-weight: bold;
-      display: block;
-    }
-
-    .unidad-tiempo label {
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-top: 0.3rem;
-      display: block;
+    .bloque-re::after {
+      bottom: 0;
     }
 
     /* Error */
@@ -75,13 +109,13 @@
 
     .error-container h1 {
       font-size: 1.5rem;
-      color: #BD7914;
+      color: #233D30;
       margin-bottom: 1rem;
     }
 
     .error-container p {
       font-size: 1rem;
-      color: #8b1d1d;
+      color: #6C5B39;
       margin: 0 0 1.5rem 0;
     }
 
@@ -97,15 +131,11 @@
       padding: 0.6rem 1.2rem;
       border: none;
       border-radius: 8px;
-      background: #BD7914;
+      background: #233D30;
       color: white;
       cursor: pointer;
       font-size: 1rem;
       transition: 0.3s;
-    }
-
-    .botones button:hover {
-      background: #a66a12;
     }
 
     /* Modales */
@@ -252,34 +282,10 @@
       transform: scale(1.05);           /* pequeño efecto de zoom */
     }
 
-    .bloque-banco {
-      position: relative;
-      margin: 2rem auto;
-      padding: 1.5rem 1rem;
-      max-width: 300px;
-    }
-
-    .bloque-banco::before,
-    .bloque-banco::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(to right, transparent, #BD7914, #BD7914, #BD7914, transparent);
-    }
-
-    .bloque-banco::before {
-      top: 0;
-    }
-
-    .bloque-banco::after {
-      bottom: 0;
-    }
 
 
 
-/* ---------------------- INICIA CUENTA REGRESIVA ---------------------- */
+    /* ---------------------- INICIA CUENTA REGRESIVA ---------------------- */
 
 .regresiva {
   display: flex;
@@ -336,7 +342,7 @@
 
 .unidad-tiempo {
   background: linear-gradient(#233D30);
-  color: #BD7914;
+  color: #ffffff;
   font-family: 'Roboto', monospace;
   text-align: center;
   border-radius: 8px;
@@ -359,7 +365,7 @@
   font-weight: 600;
   margin-top: 0.3rem;
   display: block;
-  color: #BD7914;
+  color: #ffffff;
 }
 
 /* Animación tipo "pasar página" */
@@ -387,6 +393,7 @@
 
 /* ---------------------- FINALIZA CUENTA REGRESIVA ---------------------- */
     
+
 
 
 
