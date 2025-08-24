@@ -279,5 +279,113 @@
 
 
 
+/* ---------------------- INICIA CUENTA REGRESIVA ---------------------- */
+
+.regresiva {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(90deg,  #222E27, #171f1a);
+  gap: 1rem;
+  margin-top: 0rem;
+  flex-wrap: wrap;
+  padding: 4rem 1rem 4rem 1rem;
+}
+
+.cuenta-regresiva {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.encabezado-regresiva {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.regresiva h1 {
+  font-size: 4.5rem;
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  color: #BD7914;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 0.5rem 0rem 0.5rem 0rem;
+}
+
+.nombres {
+  font-family: 'Playfair Display', serif;
+  color: #6C5B39;
+  font-size: 1.2rem;
+  margin: 0.2rem 0 0 0;
+  text-align: center;
+  padding: 1rem 0rem 3rem 0rem;
+}
+
+.final {
+  font-family: 'Playfair Display', serif;
+  color: #6C5B39;
+  font-size: 1.7rem;
+  padding: 2rem 0rem 0rem 0rem;
+}
+
+.unidad-tiempo {
+  background: linear-gradient(#233D30);
+  color: #6C5B39;
+  font-family: 'Roboto', monospace;
+  text-align: center;
+  border-radius: 8px;
+  padding: 0.5rem;
+  min-width: 60px;
+}
+
+.unidad-tiempo span {
+  font-size: 3rem;
+  font-weight: bold;
+  display: inline-block;
+  animation: flip 1s ease-in-out;
+  transform-origin: bottom;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.unidad-tiempo label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.3rem;
+  display: block;
+  color: #6C5B39;
+}
+
+/* Animación tipo "pasar página" */
+/* Animación para los números de la cuenta regresiva */
+.animar {
+  animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.3);
+    color: #ff4d6d; /* opcional: color animado */
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    color: inherit;
+  }
+}
+
+/* ---------------------- FINALIZA CUENTA REGRESIVA ---------------------- */
+    
 
 
