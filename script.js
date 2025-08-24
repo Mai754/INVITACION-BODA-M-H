@@ -149,32 +149,34 @@ function abrirModalImagen(src) {
   }
 }
 
-// Cerrar modal
-function cerrarModalImagen() {
+// Abrir modal
+function abrirModalImagen(src) {
   const modal = document.getElementById('modalImagen');
-  if (modal) modal.style.display = 'none';
+  const imgGrande = document.getElementById('imagenGrande');
+  imgGrande.src = src;
+  modal.style.display = 'flex';
 }
 
+// Cerrar modal
+function cerrarModalImagen() {
+  document.getElementById('modalImagen').style.display = 'none';
+}
+
+// Manejador universal
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("modalImagen");
   const imagenGrande = document.getElementById("imagenGrande");
 
-  // Cierra si se toca fuera de la imagen
+  // Cerrar si se hace click o toque fuera de la imagen
   modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      cerrarModalImagen();
-    }
-  });
-
-  // Evita que al tocar la imagen también cierre el modal
-  imagenGrande.addEventListener("click", (e) => {
-    e.stopPropagation();
+    if (e.target === modal) cerrarModalImagen();
   });
 });
 
 // Exponer globalmente
 window.abrirModalImagen = abrirModalImagen;
 window.cerrarModalImagen = cerrarModalImagen;
+
 
 
 
