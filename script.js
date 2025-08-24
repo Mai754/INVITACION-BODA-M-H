@@ -100,6 +100,9 @@ function scrollGaleria(direccion) {
   }
 }
 
+// 👇 importante: exponer al scope global
+window.scrollGaleria = scrollGaleria;
+
 // Auto-scroll de la galería
 const galeria = document.getElementById("galeriaScroll");
 galeria.addEventListener("mouseover", () => clearInterval(autoScroll));
