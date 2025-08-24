@@ -62,16 +62,16 @@
 
     /* Error */
     .error-container {
-        text-align: center;
-        background: #fff;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        padding: 2rem 2.5rem;
-        max-width: 700px;      /* antes estaba 500px */
-        width: 80%;             /* se ajusta en pantallas pequeñas */
-        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-        margin: 0 auto;         /* centrado horizontal */
+      text-align: center;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      max-width: 100%;        /* 👈 que ocupe el ancho del container */
+      width: 100%;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     }
+
 
     .error-container h1 {
       font-size: 1.5rem;
@@ -277,4 +277,13 @@
       bottom: 0;
 
     }
+
+/* Para alinear todo en el mismo ancho */
+.container {
+  max-width: 700px;   /* mismo ancho que el error-container */
+  width: 100%;
+  margin: 0 auto;     /* centrado dentro del body */
+  padding: 2rem 1rem; /* agrega margen lateral */
+  box-sizing: border-box;
+}
 
