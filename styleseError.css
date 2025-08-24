@@ -336,7 +336,7 @@
 
 .unidad-tiempo {
   background: linear-gradient(#233D30);
-  color: #6C5B39;
+  color: #BD7914;
   font-family: 'Roboto', monospace;
   text-align: center;
   border-radius: 8px;
@@ -359,7 +359,7 @@
   font-weight: 600;
   margin-top: 0.3rem;
   display: block;
-  color: #6C5B39;
+  color: #BD7914;
 }
 
 /* Animación tipo "pasar página" */
@@ -387,5 +387,6 @@
 
 /* ---------------------- FINALIZA CUENTA REGRESIVA ---------------------- */
     
+
 
 
