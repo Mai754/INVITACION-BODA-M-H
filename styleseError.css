@@ -18,66 +18,9 @@
     }
 
     /* Sección superior */
-    /* ------------------- AJUSTES CUENTA REGRESIVA ------------------- */
-
-  /* Top-section centrado con margen */
-  .top-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 2rem; /* separación con el error-container */
-    padding: 0 1rem;     /* margen lateral para móviles */
-    width: 100%;
-    max-width: 700px;    /* mismo ancho que el error-container */
-    box-sizing: border-box;
-  }
-
-  /* Cuenta regresiva: siempre en línea y centrada */
-  .cuenta-regresiva {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: nowrap;   /* evita salto de línea */
-    overflow-x: auto;    /* scroll horizontal si pantalla muy pequeña */
-    padding-bottom: 1rem;
-  }
-
-  /* Bloques de tiempo con sombras y colores dorados */
-  .unidad-tiempo {
-    background: #222E27;
-    color: #BD7914;
-    font-family: 'Roboto', monospace;
-    text-align: center;
-    border-radius: 10px;
-    padding: 0.8rem;
-    min-width: 70px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    flex-shrink: 0; /* evita que se encojan demasiado en móviles */
-  }
-
-  /* Números y labels */
-  .unidad-tiempo span {
-    font-size: 2rem;
-    font-weight: bold;
-    display: block;
-  }
-
-  .unidad-tiempo label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-top: 0.3rem;
-    display: block;
-  }
-
-  /* Bloque M&H encima de la cuenta regresiva */
-  .bloque-re h1 {
-    font-size: 3rem;
-    font-family: 'Playfair Display', serif;
-    color: #BD7914;
-    margin: 0.5rem 0 1rem 0;
-  }
-
+    .top-section {
+      text-align: center;
+    }
 
     .bloque-re h1 {
       font-size: 3rem;
@@ -90,10 +33,8 @@
       display: flex;
       justify-content: center;
       gap: 1rem;
-      flex-wrap: nowrap; /* no permitir salto de línea */
-      overflow-x: auto;  /* scroll si es necesario en pantallas muy pequeñas */
+      flex-wrap: wrap;
     }
-
 
     .unidad-tiempo {
       background: #222E27;
@@ -121,16 +62,16 @@
 
     /* Error */
     .error-container {
-      text-align: center;
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      padding: 2rem;
-      max-width: 700px; /* antes era 500px */
-      width: 90%;       /* ocupa más espacio en móviles */
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        text-align: center;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 2rem 2.5rem;
+        max-width: 700px;      /* antes estaba 500px */
+        width: 80%;             /* se ajusta en pantallas pequeñas */
+        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        margin: 0 auto;         /* centrado horizontal */
     }
-
 
     .error-container h1 {
       font-size: 1.5rem;
